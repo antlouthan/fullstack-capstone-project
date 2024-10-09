@@ -60,8 +60,6 @@ router.post('/register', async (req, res) => {
 
     //Login Endpoint
 router.post('/login', async (req, res) => {
-    console.log("\n\n Inside login")
-
     try {
         // const collection = await connectToDatabase();
         const db = await connectToDatabase();

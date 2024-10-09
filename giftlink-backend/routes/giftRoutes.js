@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const connectToDatabase = require('../models/db');
+const { ObjectId } = require('mongodb');  // Import ObjectId for MongoDB
 const logger = require('../logger');
 
 router.get('/', async (req, res) => {
@@ -32,8 +33,8 @@ router.get('/:id', async (req, res) => {
 
         const id = req.params.id;
 
-        // Task 3: Find a specific gift by ID using the collection.fineOne method and store in constant called gift
-        const gift = await collection.findOne({id: id});
+        // Task 3: Convert the id to ObjectId and find a specific gift by _id using collection.findOne
+        const gift = await collection.findOne({ _id: new ObjectId(id) });
 
         if (!gift) {
             return res.status(404).send('Gift not found');
@@ -45,6 +46,9 @@ router.get('/:id', async (req, res) => {
         res.status(500).send('Error fetching gift');
     }
 });
+
+
+
 
 
 

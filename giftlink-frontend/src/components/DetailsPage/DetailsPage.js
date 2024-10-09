@@ -15,14 +15,21 @@ function DetailsPage() {
         if (!authenticationToken) {
             // Task 1: Check for authentication and redirect
             navigate('/app/login');
+            return;  // Exit the effect early if not authenticated
         }
-
+    
         // get the gift to be rendered on the details page
         const fetchGift = async () => {
             try {
                 // Task 2: Fetch gift details
                 const url = `${urlConfig.backendUrl}/api/gifts/${productId}`;
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authenticationToken}`  // Include the JWT in the Authorization header
+                    }
+                });
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -34,13 +41,13 @@ function DetailsPage() {
                 setLoading(false);
             }
         };
-
+    
         fetchGift();
-
+    
         // Task 3: Scroll to top on component mount
         window.scrollTo(0, 0);
-
     }, [productId, navigate]);
+    
 
     const handleBackClick = () => {
         // Task 4: Handle back click
