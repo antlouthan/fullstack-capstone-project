@@ -122,7 +122,7 @@ function RegisterPage() {
                         </div>
                         <button className="btn btn-primary w-100 mb-3" onClick={handleRegister}>Register</button>
                         <p className="mt-4 text-center">
-                            Already a member? <a href="/app/login" className="text-primary">Login</a>
+                            Already a member? <Link to="/app/login" className="text-primary">Login</Link>
                         </p>
                     </div>
                 </div>
